@@ -6,7 +6,10 @@ const NewColumnButton: React.FC<INewColumnButton> = ({ setColumns }) => {
   const { t } = useTranslation();
 
   function addColumn() {
-    setColumns((prevColumns) => [...prevColumns, t("new_column")]);
+    setColumns((prevColumns) => [
+      ...prevColumns,
+      { id: crypto.randomUUID(), title: t("new_column") },
+    ]);
   }
 
   return (

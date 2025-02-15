@@ -1,10 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 
-type SetColumns = Dispatch<SetStateAction<string[]>>;
+type SetColumns = Dispatch<SetStateAction<IColumn[]>>;
+
+export interface IColumn {
+  id: string;
+  title: string;
+}
 
 export interface IColumns {
-  title: string;
-  index: number;
+  column: IColumn;
   setColumns: SetColumns;
 }
 
@@ -14,5 +18,5 @@ export interface INewColumnButton {
 
 export interface IDeleteColumnButton {
   setColumns: SetColumns;
-  currentColumnIndex: number;
+  currentColumnId: string;
 }

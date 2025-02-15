@@ -3,11 +3,11 @@ import { IDeleteColumnButton } from "types/Colums";
 
 const DeleteColumnButton: React.FC<IDeleteColumnButton> = ({
   setColumns,
-  currentColumnIndex,
+  currentColumnId,
 }) => {
   function removeColumn() {
     setColumns((prevColumns) =>
-      prevColumns?.filter((_, index) => index !== currentColumnIndex)
+      prevColumns?.filter((column) => column.id !== currentColumnId)
     );
   }
 

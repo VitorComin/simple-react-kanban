@@ -1,4 +1,5 @@
-.columns-container {
+.columns-container,
+.column-container-while-dragging {
   width: 310px;
   height: 80vh;
   border-radius: 8px;
@@ -15,6 +16,12 @@
     0 3px 8px rgba(0, 0, 0, 0.04),
     0 4px 6px rgba(0, 0, 0, 0.03);
   transition: box-shadow 0.3s ease-in-out;
+}
+
+.column-container-while-dragging {
+  opacity: 0.5;
+  border: 1px rgb(193, 119, 29) solid;
+  background-color: rgb(154, 127, 93);
 }
 
 .columns-header {
