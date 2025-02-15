@@ -2,17 +2,17 @@ import { Dispatch, SetStateAction } from "react";
 
 type SetColumns = Dispatch<SetStateAction<string[]>>;
 
-export interface Column {
+export interface IColumns {
   title: string;
   index: number;
   setColumns: SetColumns;
 }
 
-export interface NewColumnButton {
+export interface INewColumnButton {
   setColumns: SetColumns;
 }
 
-export interface DeleteColumnButton {
+export interface IDeleteColumnButton {
   setColumns: SetColumns;
   currentColumnIndex: number;
 }
