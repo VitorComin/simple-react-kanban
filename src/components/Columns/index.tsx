@@ -1,15 +1,22 @@
 import React from "react";
 import { DeleteIcon } from "../../assets/icons/Icons";
+import { IColumns } from "types/Colums";
 
-const Columns: React.FC = () => {
+const Columns: React.FC<IColumns> = ({ title, index, setColumns }) => {
+  function removeColumn() {
+    setColumns((prevColumns) =>
+      prevColumns?.filter((_, columnIndex) => columnIndex !== index)
+    );
+  }
+
   return (
     <div className={"columns-container"}>
       <div className={"columns-header"}>
-        <span className={"columns-title"}>Titulo</span>
+        <span className={"columns-title"}>{title}</span>
         <div>
-          <span>
+          <button className={"remove-column-button"} onClick={removeColumn}>
             <DeleteIcon />
-          </span>
+          </button>
         </div>
       </div>
     </div>
