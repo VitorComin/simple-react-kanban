@@ -6,6 +6,9 @@ import {
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { IColumn } from "types/Colums";
@@ -17,6 +20,14 @@ function App() {
   const columnsIds = useMemo(
     () => columns.map((column) => column.id),
     [columns]
+  );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 50,
+      },
+    })
   );
 
   function onDragStart(event: DragStartEvent) {
@@ -52,7 +63,11 @@ function App() {
   }
 
   return (
-    <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+    <DndContext
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      sensors={sensors}
+    >
       <div className="kanban-container">
         <SortableContext items={columnsIds}>
           {columns.map((column) => (
