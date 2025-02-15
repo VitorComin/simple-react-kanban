@@ -6,9 +6,19 @@ function App() {
   // const { t, i18n } = useTranslation();
 
   return (
-    <>
+    <div className="kanban-container">
       <Columns />
-    </>
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+      <Columns />
+    </div>
     // <div>
     //   <h1>{t("test")}</h1>
     //   <button onClick={() => i18n.changeLanguage("en")}>English</button>
