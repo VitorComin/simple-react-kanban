@@ -1,11 +1,9 @@
-// import React from "react";
 import { useState } from "react";
 import Columns from "./components/Columns/index";
-// import { useTranslation } from "react-i18next";
+import NewColumnButton from "components/NewColumnButton";
 
 function App() {
-  const [columns, setColumns] = useState(["Coluna 1"]);
-  // const { t, i18n } = useTranslation();
+  const [columns, setColumns] = useState<string[]>([]);
 
   return (
     <div className="kanban-container">
@@ -17,6 +15,7 @@ function App() {
           setColumns={setColumns}
         />
       ))}
+      <NewColumnButton setColumns={setColumns} />
     </div>
     // <div>
     //   <h1>{t("test")}</h1>
