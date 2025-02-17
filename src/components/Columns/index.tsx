@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { IColumns } from "types/Colums";
 import DeleteColumnButton from "components/DeleteColumnButton";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import NewTaskButton from "components/NewTaskButton";
+import { ICard } from "types/Card";
+import Cards from "components/Cards";
 
 const Columns: React.FC<IColumns> = ({ column, setColumns }) => {
+  const [cards, setCards] = useState<ICard[]>([]);
   const {
     setNodeRef,
     attributes,
@@ -49,6 +53,10 @@ const Columns: React.FC<IColumns> = ({ column, setColumns }) => {
           />
         </div>
       </div>
+      {cards.map((card) => (
+        <Cards card={card} setCards={setCards} />
+      ))}
+      <NewTaskButton columnId={column.id} setCards={setCards} />
     </div>
   );
 };

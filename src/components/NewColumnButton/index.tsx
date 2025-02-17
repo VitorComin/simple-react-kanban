@@ -1,4 +1,4 @@
-import { AddIcon } from "assets/icons/Icons";
+import { WhiteAddIcon } from "assets/icons/Icons";
 import { useTranslation } from "react-i18next";
 import { INewColumnButton } from "types/Colums";
 
@@ -14,7 +14,7 @@ const NewColumnButton: React.FC<INewColumnButton> = ({ setColumns }) => {
 
   return (
     <button className="add-column-button" onClick={addColumn}>
-      <AddIcon />
+      <WhiteAddIcon />
       <span>{t("add_column")}</span>
     </button>
   );

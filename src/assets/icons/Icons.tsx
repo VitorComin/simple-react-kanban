@@ -10,7 +10,7 @@ export const DeleteIcon = () => (
   </svg>
 );
 
-export const AddIcon = () => (
+export const WhiteAddIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     height="24px"
@@ -19,5 +19,17 @@ export const AddIcon = () => (
     fill="#FFFFFF"
   >
     <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+  </svg>
+);
+
+export const DarkAddIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="20px"
+    viewBox="0 -960 960 960"
+    width="20px"
+    fill="#595959"
+  >
+    <path d="M444-444H240v-72h204v-204h72v204h204v72H516v204h-72v-204Z" />
   </svg>
 );
