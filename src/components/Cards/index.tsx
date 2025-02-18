@@ -31,7 +31,13 @@ const Cards: React.FC<ICards> = ({ card, setCards }) => {
   };
 
   if (isDragging) {
-    return <div ref={setNodeRef} style={style} className="cards-container" />;
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="cards-container-while-dragging"
+      />
+    );
   }
 
   return (
