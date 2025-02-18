@@ -1,9 +1,10 @@
 import { WhiteAddIcon } from "assets/icons/Icons";
+import { useKanban } from "contexts/KanbanContext";
 import { useTranslation } from "react-i18next";
-import { INewColumnButton } from "types/Colums";
 
-const NewColumnButton: React.FC<INewColumnButton> = ({ setColumns }) => {
+const NewColumnButton: React.FC = () => {
   const { t } = useTranslation();
+  const { setColumns } = useKanban();
 
   function addColumn() {
     setColumns((prevColumns) => [

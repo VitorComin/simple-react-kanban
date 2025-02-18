@@ -11,15 +11,15 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import { IColumn } from "types/Colums";
+import { IColumn } from "types/Columns";
 import { createPortal } from "react-dom";
 import Columns from "components/Columns";
 import { ICard } from "types/Card";
 import Cards from "components/Cards";
+import { useKanban } from "contexts/KanbanContext";
 
 const KanbanBoard: React.FC = () => {
-  const [columns, setColumns] = useState<IColumn[]>([]);
-  const [cards, setCards] = useState<ICard[]>([]);
+  const { setCards, columns, setColumns } = useKanban();
   const [activeColumn, setActiveColumn] = useState<IColumn | null>(null);
   const [activeCard, setActiveCard] = useState<ICard | null>(null);
 
@@ -159,28 +159,15 @@ const KanbanBoard: React.FC = () => {
       <div className="kanban-container">
         <SortableContext items={columnsIds}>
           {columns.map((column) => (
-            <Columns
-              column={column}
-              key={column.id}
-              setColumns={setColumns}
-              cards={cards}
-              setCards={setCards}
-            />
+            <Columns column={column} key={column.id} />
           ))}
         </SortableContext>
-        <NewColumnButton setColumns={setColumns} />
+        <NewColumnButton />
       </div>
       {createPortal(
         <DragOverlay>
-          {activeColumn && (
-            <Columns
-              column={activeColumn}
-              setColumns={setColumns}
-              cards={cards}
-              setCards={setCards}
-            />
-          )}
-          {activeCard && <Cards card={activeCard} setCards={setCards} />}
+          {activeColumn && <Columns column={activeColumn} />}
+          {activeCard && <Cards card={activeCard} />}
         </DragOverlay>,
         document.body
       )}

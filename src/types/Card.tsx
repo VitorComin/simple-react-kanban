@@ -9,16 +9,13 @@ export interface ICard {
 }
 
 export interface INewCardButton {
-  setCards: SetCards;
   columnId: string;
 }
 
 export interface ICards {
   card: ICard;
-  setCards: SetCards;
 }
 
 export interface IDeleteCardButton {
-  setCards: SetCards;
   currentCardId: string;
 }

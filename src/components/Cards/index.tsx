@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ICards } from "types/Card";
 import { CSS } from "@dnd-kit/utilities";
 
-const Cards: React.FC<ICards> = ({ card, setCards }) => {
+const Cards: React.FC<ICards> = ({ card }) => {
   const { t } = useTranslation();
 
   const {
@@ -49,7 +49,7 @@ const Cards: React.FC<ICards> = ({ card, setCards }) => {
       {...listeners}
     >
       <span>{t("new_card")}</span>
-      <DeleteCardButton currentCardId={card.id} setCards={setCards} />
+      <DeleteCardButton currentCardId={card.id} />
     </div>
   );
 };

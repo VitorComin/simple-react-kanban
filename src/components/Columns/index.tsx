@@ -1,20 +1,19 @@
 import React, { useEffect, useMemo } from "react";
-import { IColumns } from "types/Colums";
+import { IColumns } from "types/Columns";
 import DeleteColumnButton from "components/DeleteColumnButton";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import NewTaskButton from "components/NewTaskButton";
 import Cards from "components/Cards";
+import { useKanban } from "contexts/KanbanContext";
 
-const Columns: React.FC<IColumns> = ({
-  column,
-  setColumns,
-  cards,
-  setCards,
-}) => {
+const Columns: React.FC<IColumns> = ({ column }) => {
+  const { cards } = useKanban();
+
   const cardsIds = useMemo(() => {
     return cards.map((card) => card.id);
   }, [cards]);
+
   const {
     setNodeRef,
     attributes,
@@ -87,21 +86,15 @@ const Columns: React.FC<IColumns> = ({
       <div className={"columns-header"} {...attributes} {...listeners}>
         <span className={"columns-title"}>{column.title}</span>
         <div>
-          <DeleteColumnButton
-            setColumns={setColumns}
-            setCards={setCards}
-            currentColumnId={column.id}
-          />
+          <DeleteColumnButton currentColumnId={column.id} />
         </div>
       </div>
       <SortableContext items={cardsIds}>
         {cards
           .filter((card) => card.columnId === column.id)
-          ?.map((card) => (
-            <Cards card={card} key={card.id} setCards={setCards} />
-          ))}
+          ?.map((card) => <Cards card={card} key={card.id} />)}
       </SortableContext>
-      <NewTaskButton columnId={column.id} setCards={setCards} />
+      <NewTaskButton columnId={column.id} />
     </div>
   );
 };
