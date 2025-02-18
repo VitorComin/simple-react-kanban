@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-type SetCards = Dispatch<SetStateAction<ICard[]>>;
+export type SetCards = Dispatch<SetStateAction<ICard[]>>;
 
 export interface ICard {
   id: string;

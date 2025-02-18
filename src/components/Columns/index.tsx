@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { IColumns } from "types/Colums";
 import DeleteColumnButton from "components/DeleteColumnButton";
-import { useSortable } from "@dnd-kit/sortable";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import NewTaskButton from "components/NewTaskButton";
-import { ICard } from "types/Card";
 import Cards from "components/Cards";
 
-const Columns: React.FC<IColumns> = ({ column, setColumns }) => {
-  const [cards, setCards] = useState<ICard[]>([]);
+const Columns: React.FC<IColumns> = ({
+  column,
+  setColumns,
+  cards,
+  setCards,
+}) => {
+  const cardsIds = useMemo(() => {
+    return cards.map((card) => card.id);
+  }, [cards]);
   const {
     setNodeRef,
     attributes,
@@ -83,13 +89,18 @@ const Columns: React.FC<IColumns> = ({ column, setColumns }) => {
         <div>
           <DeleteColumnButton
             setColumns={setColumns}
+            setCards={setCards}
             currentColumnId={column.id}
           />
         </div>
       </div>
-      {cards.map((card) => (
-        <Cards card={card} setCards={setCards} />
-      ))}
+      <SortableContext items={cardsIds}>
+        {cards
+          .filter((card) => card.columnId === column.id)
+          ?.map((card) => (
+            <Cards card={card} key={card.id} setCards={setCards} />
+          ))}
+      </SortableContext>
       <NewTaskButton columnId={column.id} setCards={setCards} />
     </div>
   );

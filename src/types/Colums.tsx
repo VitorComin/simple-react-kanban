@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { ICard, SetCards } from "./Card";
 
 type SetColumns = Dispatch<SetStateAction<IColumn[]>>;
 
@@ -10,6 +11,8 @@ export interface IColumn {
 export interface IColumns {
   column: IColumn;
   setColumns: SetColumns;
+  cards: ICard[];
+  setCards: SetCards;
 }
 
 export interface INewColumnButton {
@@ -18,5 +21,6 @@ export interface INewColumnButton {
 
 export interface IDeleteColumnButton {
   setColumns: SetColumns;
+  setCards: SetCards;
   currentColumnId: string;
 }
