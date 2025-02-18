@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IColumns } from "types/Colums";
 import DeleteColumnButton from "components/DeleteColumnButton";
 import { useSortable } from "@dnd-kit/sortable";
@@ -31,6 +31,40 @@ const Columns: React.FC<IColumns> = ({ column, setColumns }) => {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      const target = event.target as HTMLElement;
+      const column = target.closest(".columns-container") as HTMLElement | null;
+
+      if (column) {
+        // Verifica se a coluna tem overflow vertical
+        const isScrollable = column.scrollHeight > column.clientHeight;
+        const canScrollUp = column.scrollTop > 0;
+        const canScrollDown =
+          column.scrollTop + column.clientHeight < column.scrollHeight;
+
+        if (isScrollable && (canScrollUp || canScrollDown)) {
+          // Permite o scroll vertical normalmente dentro da coluna
+          return;
+        }
+      }
+
+      // Caso contrário, faz o scroll horizontal
+      event.preventDefault();
+      const smoothFactor = 0.3;
+      const delta = event.deltaY * smoothFactor;
+      document.documentElement.scrollLeft += delta;
+    };
+
+    document.documentElement.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
+
+    return () => {
+      document.documentElement.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
   if (isDragging) {
     return (

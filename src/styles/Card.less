@@ -1,6 +1,6 @@
 .cards-container {
   font-size: 16px;
-  width: 90%;
+  width: 270px;
   color: #595959;
   background-color: #ffffff;
   border: 1px #595959 solid;
@@ -9,11 +9,12 @@
   padding: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .add-card-button {
   font-size: 16px;
-  width: 90%;
+  width: 310px;
   color: #595959;
   background-color: transparent;
   border: 1px #595959 dashed;
@@ -27,5 +28,16 @@
 }
 
 .add-card-button:hover {
+  transform: translateY(-2px);
+}
+
+.remove-card-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.remove-card-button:hover {
   transform: translateY(-2px);
 }

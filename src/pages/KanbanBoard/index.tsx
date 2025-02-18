@@ -20,9 +20,19 @@ const KanbanBoard: React.FC = () => {
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
+      const target = event.target as HTMLElement;
+
+      if (target.closest(".columns-container")) {
+        const column = target.closest(".columns-container") as HTMLElement;
+
+        if (column.scrollHeight > column.clientHeight) {
+          return;
+        }
+      }
+
       event.preventDefault();
 
-      const smoothFactor = 0.3;
+      const smoothFactor = 0.001;
       const delta = event.deltaY * smoothFactor;
 
       document.documentElement.scrollLeft += delta;

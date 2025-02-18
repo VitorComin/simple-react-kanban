@@ -17,3 +17,8 @@ export interface ICards {
   card: ICard;
   setCards: SetCards;
 }
+
+export interface IDeleteCardButton {
+  setCards: SetCards;
+  currentCardId: string;
+}
