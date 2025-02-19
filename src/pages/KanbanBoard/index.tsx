@@ -17,6 +17,7 @@ import Columns from "components/Columns";
 import { ICard } from "types/Card";
 import Cards from "components/Cards";
 import { useKanban } from "contexts/KanbanContext";
+import { ToastContainer } from "react-toastify";
 
 const KanbanBoard: React.FC = () => {
   const { setCards, columns, setColumns } = useKanban();
@@ -171,6 +172,7 @@ const KanbanBoard: React.FC = () => {
         </DragOverlay>,
         document.body
       )}
+      <ToastContainer />
     </DndContext>
   );
 };

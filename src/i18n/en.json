@@ -2,5 +2,6 @@
   "add_column": "Add Column",
   "new_column": "New column",
   "add_card": "Add Card",
-  "new_card": "New card"
+  "new_card": "New card",
+  "saved_successfully": "Saved successfully!"
 }

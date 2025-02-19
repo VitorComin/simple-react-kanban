@@ -3,8 +3,12 @@ import EditColumnButton from "components/EditColumnButton";
 import { useKanban } from "contexts/KanbanContext";
 import { useRef, useState } from "react";
 import { IColumnsHeaderContent } from "types/Columns";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
+  const { t } = useTranslation();
   const { setColumns } = useKanban();
   const [columnTitleReadOnly, setColumnTitleReadOnly] = useState(false);
   const columnTitleInputElementRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +26,17 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
         col.id === column.id ? { ...col, title: newTitle } : col
       )
     );
+
+    //Colocar em um util a parte
+    toast.success(t("saved_successfully"), {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    });
   }
 
   function setTitleEditableAndFocusIt() {
@@ -42,7 +57,6 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
         onChange={handleTitleChange}
         onBlur={handleColumnReadOnlyAndSaveEdit}
       />
-
       <div>
         <EditColumnButton onClick={setTitleEditableAndFocusIt} />
         <DeleteColumnButton currentColumnId={column.id} />
