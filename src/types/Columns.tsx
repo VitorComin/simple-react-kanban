@@ -14,3 +14,7 @@ export interface IColumns {
 export interface IDeleteColumnButton {
   currentColumnId: string;
 }
+
+export interface IColumnsHeaderContent {
+  column: IColumn;
+}

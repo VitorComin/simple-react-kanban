@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import NewTaskButton from "components/NewTaskButton";
 import Cards from "components/Cards";
 import { useKanban } from "contexts/KanbanContext";
+import ColumnsHeaderContent from "components/ColumnsHeaderContent";
 
 const Columns: React.FC<IColumns> = ({ column }) => {
   const { cards } = useKanban();
@@ -43,19 +44,16 @@ const Columns: React.FC<IColumns> = ({ column }) => {
       const column = target.closest(".columns-container") as HTMLElement | null;
 
       if (column) {
-        // Verifica se a coluna tem overflow vertical
         const isScrollable = column.scrollHeight > column.clientHeight;
         const canScrollUp = column.scrollTop > 0;
         const canScrollDown =
           column.scrollTop + column.clientHeight < column.scrollHeight;
 
         if (isScrollable && (canScrollUp || canScrollDown)) {
-          // Permite o scroll vertical normalmente dentro da coluna
           return;
         }
       }
 
-      // Caso contrário, faz o scroll horizontal
       event.preventDefault();
       const smoothFactor = 0.3;
       const delta = event.deltaY * smoothFactor;
@@ -84,10 +82,7 @@ const Columns: React.FC<IColumns> = ({ column }) => {
   return (
     <div className={"columns-container"} ref={setNodeRef} style={style}>
       <div className={"columns-header"} {...attributes} {...listeners}>
-        <span className={"columns-title"}>{column.title}</span>
-        <div>
-          <DeleteColumnButton currentColumnId={column.id} />
-        </div>
+        <ColumnsHeaderContent column={column} />
       </div>
       <SortableContext items={cardsIds}>
         {cards
