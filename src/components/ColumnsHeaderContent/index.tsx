@@ -3,12 +3,11 @@ import EditColumnButton from "components/EditColumnButton";
 import { useKanban } from "contexts/KanbanContext";
 import { useRef, useState } from "react";
 import { IColumnsHeaderContent } from "types/Columns";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useTranslation } from "react-i18next";
+import { useToastMessages } from "utils/toastMessages";
 
 const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
-  const { t } = useTranslation();
+  const { savedSuccessfullyMessage } = useToastMessages();
   const { setColumns } = useKanban();
   const [columnTitleReadOnly, setColumnTitleReadOnly] = useState(false);
   const columnTitleInputElementRef = useRef<HTMLInputElement | null>(null);
@@ -21,22 +20,19 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
   function handleColumnReadOnlyAndSaveEdit() {
     setColumnTitleReadOnly(true);
 
-    setColumns((prevColumns) =>
-      prevColumns.map((col) =>
-        col.id === column.id ? { ...col, title: newTitle } : col
-      )
-    );
+    if (titleHasChanged()) {
+      setColumns((prevColumns) =>
+        prevColumns.map((col) =>
+          col.id === column.id ? { ...col, title: newTitle } : col
+        )
+      );
 
-    //Colocar em um util a parte
-    toast.success(t("saved_successfully"), {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "light",
-    });
+      savedSuccessfullyMessage();
+    }
+  }
+
+  function titleHasChanged() {
+    return newTitle !== column.title;
   }
 
   function setTitleEditableAndFocusIt() {

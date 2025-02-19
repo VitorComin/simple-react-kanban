@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import { IColumns } from "types/Columns";
-import DeleteColumnButton from "components/DeleteColumnButton";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import NewTaskButton from "components/NewTaskButton";
