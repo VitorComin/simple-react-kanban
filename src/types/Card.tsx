@@ -19,3 +19,7 @@ export interface ICards {
 export interface IDeleteCardButton {
   currentCardId: string;
 }
+
+export interface ICardsContent {
+  card: ICard;
+}

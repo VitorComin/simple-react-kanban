@@ -11,10 +11,10 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
   const { setColumns } = useKanban();
   const [columnTitleReadOnly, setColumnTitleReadOnly] = useState(false);
   const columnTitleInputElementRef = useRef<HTMLInputElement | null>(null);
-  const [newTitle, setNewTitle] = useState(column.title);
+  const [newColumnTitle, setNewColumnTitle] = useState(column.title);
 
-  function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setNewTitle(e.target.value);
+  function handleColumnTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setNewColumnTitle(e.target.value);
   }
 
   function handleColumnReadOnlyAndSaveEdit() {
@@ -23,7 +23,7 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
     if (titleHasChanged()) {
       setColumns((prevColumns) =>
         prevColumns.map((col) =>
-          col.id === column.id ? { ...col, title: newTitle } : col
+          col.id === column.id ? { ...col, title: newColumnTitle } : col
         )
       );
 
@@ -32,7 +32,7 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
   }
 
   function titleHasChanged() {
-    return newTitle !== column.title;
+    return newColumnTitle !== column.title;
   }
 
   function setTitleEditableAndFocusIt() {
@@ -48,9 +48,9 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
       <input
         className="columns-title-input"
         readOnly={columnTitleReadOnly}
-        value={newTitle}
+        value={newColumnTitle}
         ref={columnTitleInputElementRef}
-        onChange={handleTitleChange}
+        onChange={handleColumnTitleChange}
         onBlur={handleColumnReadOnlyAndSaveEdit}
       />
       <div>

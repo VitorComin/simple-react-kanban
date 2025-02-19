@@ -3,6 +3,8 @@ import DeleteCardButton from "components/DeleteCardButton";
 import { useTranslation } from "react-i18next";
 import { ICards } from "types/Card";
 import { CSS } from "@dnd-kit/utilities";
+import EditCardButton from "components/EditCardButton";
+import CardsContent from "components/CardsContent";
 
 const Cards: React.FC<ICards> = ({ card }) => {
   const { t } = useTranslation();
@@ -48,8 +50,7 @@ const Cards: React.FC<ICards> = ({ card }) => {
       {...attributes}
       {...listeners}
     >
-      <span>{t("new_card")}</span>
-      <DeleteCardButton currentCardId={card.id} />
+      <CardsContent card={card} />
     </div>
   );
 };
