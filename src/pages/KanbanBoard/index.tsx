@@ -28,8 +28,10 @@ const KanbanBoard: React.FC = () => {
     const handleVerticalAndHorizontalScroll = (event: WheelEvent) => {
       const target = event.target as HTMLElement;
 
-      if (target.closest(".columns-container")) {
-        const column = target.closest(".columns-container") as HTMLElement;
+      if (target.closest(".column-cards-list-container")) {
+        const column = target.closest(
+          ".column-cards-list-container"
+        ) as HTMLElement;
         const columnIsWithVerticalOverflow =
           column.scrollHeight > column.clientHeight;
 

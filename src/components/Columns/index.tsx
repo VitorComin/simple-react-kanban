@@ -11,12 +11,14 @@ const Columns: React.FC<IColumns> = ({ column }) => {
 
   return (
     <ColumnDragAndDrop column={column}>
-      <SortableContext items={cardsIds}>
-        {cards
-          .filter((card) => card.columnId === column.id)
-          ?.map((card) => <Cards card={card} key={card.id} />)}
-      </SortableContext>
-      <NewCardButton columnId={column.id} />
+      <div className="column-cards-list-container">
+        <SortableContext items={cardsIds}>
+          {cards
+            .filter((card) => card.columnId === column.id)
+            ?.map((card) => <Cards card={card} key={card.id} />)}
+        </SortableContext>
+        <NewCardButton columnId={column.id} />
+      </div>
     </ColumnDragAndDrop>
   );
 };
