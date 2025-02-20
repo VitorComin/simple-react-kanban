@@ -3,6 +3,7 @@ import EditCardButton from "components/EditCardButton";
 import { useKanban } from "contexts/KanbanContext";
 import { useRef, useState } from "react";
 import { ICardsContent } from "types/Card";
+import { checkEnterKeyAndBlurElement } from "utils/checkEnterKeyAndBlurElement";
 import { useToastMessages } from "utils/toastMessages";
 
 const CardsContent: React.FC<ICardsContent> = ({ card }) => {
@@ -53,6 +54,7 @@ const CardsContent: React.FC<ICardsContent> = ({ card }) => {
         ref={cardTitleInputElementRef}
         onChange={handleCardTitleChange}
         onBlur={handleColumnReadOnlyAndSaveEdit}
+        onKeyDown={checkEnterKeyAndBlurElement}
       />
       <div>
         <EditCardButton onClick={setCardTitleEditableAndFocusIt} />

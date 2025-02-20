@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { IColumnsHeaderContent } from "types/Columns";
 import "react-toastify/dist/ReactToastify.css";
 import { useToastMessages } from "utils/toastMessages";
+import { checkEnterKeyAndBlurElement } from "utils/checkEnterKeyAndBlurElement";
 
 const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
   const { savedSuccessfullyMessage } = useToastMessages();
@@ -52,6 +53,7 @@ const ColumnsHeaderContent: React.FC<IColumnsHeaderContent> = ({ column }) => {
         ref={columnTitleInputElementRef}
         onChange={handleColumnTitleChange}
         onBlur={handleColumnReadOnlyAndSaveEdit}
+        onKeyDown={checkEnterKeyAndBlurElement}
       />
       <div>
         <EditColumnButton onClick={setTitleEditableAndFocusIt} />
