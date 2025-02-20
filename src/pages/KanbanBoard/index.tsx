@@ -140,8 +140,16 @@ const KanbanBoard: React.FC = () => {
 
             if (overIndex < 0) return prevCards;
 
-            if (prevCards[overIndex]?.columnId) {
-              prevCards[activeIndex].columnId = prevCards[overIndex].columnId;
+            if (prevCards[overIndex].columnId) {
+              const switchingCardColumn =
+                prevCards[overIndex]?.columnId !==
+                prevCards[activeIndex]?.columnId;
+
+              if (switchingCardColumn) {
+                prevCards[activeIndex].columnId = prevCards[overIndex].columnId;
+
+                return arrayMove(prevCards, activeIndex, overIndex - 1);
+              }
             }
 
             return arrayMove(prevCards, activeIndex, overIndex);
@@ -159,6 +167,8 @@ const KanbanBoard: React.FC = () => {
             const activeIndex = prevCards.findIndex(
               (card) => card.id === activeCardId
             );
+
+            if (activeIndex === -1) return prevCards;
 
             prevCards[activeIndex].columnId = overId;
 
