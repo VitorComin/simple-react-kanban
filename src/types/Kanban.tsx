@@ -7,6 +7,8 @@ export interface IKanbanContext {
   setCards: SetCards;
   columns: IColumn[];
   setColumns: SetColumns;
+  cardsIds: string[];
+  columnsIds: string[];
 }
 
 export interface IKanbanProviderProps {

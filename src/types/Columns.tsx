@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type SetColumns = Dispatch<SetStateAction<IColumn[]>>;
 
@@ -17,4 +17,9 @@ export interface IDeleteColumnButton {
 
 export interface IColumnsHeaderContent {
   column: IColumn;
+}
+
+export interface IColumnDragAndDrop {
+  column: IColumn;
+  children: ReactNode;
 }

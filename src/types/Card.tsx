@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type SetCards = Dispatch<SetStateAction<ICard[]>>;
 
@@ -21,5 +21,10 @@ export interface IDeleteCardButton {
 }
 
 export interface ICardsContent {
+  card: ICard;
+}
+
+export interface ICardDragAndDrop {
+  children: ReactNode;
   card: ICard;
 }

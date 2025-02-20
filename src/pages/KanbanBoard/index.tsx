@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import NewColumnButton from "components/NewColumnButton";
 import {
   DndContext,
@@ -20,43 +20,46 @@ import { useKanban } from "contexts/KanbanContext";
 import { ToastContainer } from "react-toastify";
 
 const KanbanBoard: React.FC = () => {
-  const { setCards, columns, setColumns } = useKanban();
+  const { setCards, columns, setColumns, columnsIds } = useKanban();
   const [activeColumn, setActiveColumn] = useState<IColumn | null>(null);
   const [activeCard, setActiveCard] = useState<ICard | null>(null);
 
   useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
+    const handleVerticalAndHorizontalScroll = (event: WheelEvent) => {
       const target = event.target as HTMLElement;
 
       if (target.closest(".columns-container")) {
         const column = target.closest(".columns-container") as HTMLElement;
+        const columnIsWithVerticalOverflow =
+          column.scrollHeight > column.clientHeight;
 
-        if (column.scrollHeight > column.clientHeight) {
+        if (columnIsWithVerticalOverflow) {
           return;
         }
       }
 
       event.preventDefault();
-
-      const smoothFactor = 0.001;
+      const smoothFactor = 0.3;
       const delta = event.deltaY * smoothFactor;
-
       document.documentElement.scrollLeft += delta;
     };
 
-    document.documentElement.addEventListener("wheel", handleWheel, {
-      passive: false,
-    });
+    document.documentElement.addEventListener(
+      "wheel",
+      handleVerticalAndHorizontalScroll,
+      {
+        passive: false,
+      }
+    );
 
     return () => {
-      document.documentElement.removeEventListener("wheel", handleWheel);
+      document.documentElement.removeEventListener(
+        "wheel",
+        handleVerticalAndHorizontalScroll
+      );
     };
   }, []);
 
-  const columnsIds = useMemo(
-    () => columns.map((column) => column.id),
-    [columns]
-  );
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
