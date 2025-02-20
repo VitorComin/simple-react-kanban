@@ -44,3 +44,46 @@ body::-webkit-scrollbar {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.language-buttons-container {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.language-buttons-container img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.language-buttons-container img:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-height: 500px) {
+  .language-buttons-container {
+    right: 10px;
+    top: 10px;
+    gap: 10px;
+  }
+
+  .language-buttons-container img {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+@media (max-height: 300px) {
+  .language-buttons-container {
+    right: 2px;
+    top: 2px;
+    gap: 5px;
+  }
+
+  .language-buttons-container img {
+    height: 24px;
+    width: 24px;
+  }
+}
