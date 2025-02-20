@@ -88,6 +88,10 @@ const KanbanBoard: React.FC = () => {
 
     if (!over) return;
 
+    const isActiveAColumn = active.data.current?.type === "Column";
+
+    if (!isActiveAColumn) return;
+
     const activeColumnId = active.id as string;
     const overColumnId = over.id as string;
 
@@ -118,38 +122,48 @@ const KanbanBoard: React.FC = () => {
 
     if (activeCardId === overId) return;
 
-    const isActiveATask = active.data.current?.type === "Card";
-    const isOverATask = active.data.current?.type === "Card";
+    const isActiveACard = active.data.current?.type === "Card";
+    const isOverACard = active.data.current?.type === "Card";
 
-    if (!isActiveATask) return;
+    if (!isActiveACard) return;
 
-    if (isActiveATask && isOverATask) {
-      setCards((prevCards) => {
-        const activeIndex = prevCards.findIndex(
-          (card) => card.id === activeCardId
-        );
-        const overIndex = prevCards.findIndex((card) => card.id === overId);
+    if (isActiveACard && isOverACard) {
+      setTimeout(
+        () =>
+          setCards((prevCards) => {
+            const activeIndex = prevCards.findIndex(
+              (card) => card.id === activeCardId
+            );
+            const overIndex = prevCards.findIndex((card) => card.id === overId);
 
-        if (prevCards[overIndex]?.columnId) {
-          prevCards[activeIndex].columnId = prevCards[overIndex].columnId;
-        }
+            if (overIndex < 0) return prevCards;
 
-        return arrayMove(prevCards, activeIndex, overIndex);
-      });
+            if (prevCards[overIndex]?.columnId) {
+              prevCards[activeIndex].columnId = prevCards[overIndex].columnId;
+            }
+
+            return arrayMove(prevCards, activeIndex, overIndex);
+          }),
+        0
+      );
     }
 
     const isOverAColumn = over.data.current?.type === "Column";
 
-    if (isActiveATask && isOverAColumn) {
-      setCards((prevCards) => {
-        const activeIndex = prevCards.findIndex(
-          (card) => card.id === activeCardId
-        );
+    if (isActiveACard && isOverAColumn) {
+      setTimeout(
+        () =>
+          setCards((prevCards) => {
+            const activeIndex = prevCards.findIndex(
+              (card) => card.id === activeCardId
+            );
 
-        prevCards[activeIndex].columnId = overId;
+            prevCards[activeIndex].columnId = overId;
 
-        return arrayMove(prevCards, activeIndex, activeIndex);
-      });
+            return arrayMove(prevCards, activeIndex, activeIndex);
+          }),
+        0
+      );
     }
   }
 

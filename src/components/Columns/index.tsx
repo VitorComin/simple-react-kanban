@@ -1,7 +1,7 @@
 import React from "react";
 import { IColumns } from "types/Columns";
 import { SortableContext } from "@dnd-kit/sortable";
-import NewTaskButton from "components/NewTaskButton";
+import NewCardButton from "components/NewCardButton";
 import Cards from "components/Cards";
 import { useKanban } from "contexts/KanbanContext";
 import ColumnDragAndDrop from "components/ColumnDragAndDrop";
@@ -16,7 +16,7 @@ const Columns: React.FC<IColumns> = ({ column }) => {
           .filter((card) => card.columnId === column.id)
           ?.map((card) => <Cards card={card} key={card.id} />)}
       </SortableContext>
-      <NewTaskButton columnId={column.id} />
+      <NewCardButton columnId={column.id} />
     </ColumnDragAndDrop>
   );
 };
