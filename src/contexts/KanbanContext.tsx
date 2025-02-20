@@ -8,6 +8,8 @@ const KanbanContext = createContext<IKanbanContext | undefined>(undefined);
 export const KanbanProvider = ({ children }: IKanbanProviderProps) => {
   const [columns, setColumns] = useState<IColumn[]>([]);
   const [cards, setCards] = useState<ICard[]>([]);
+  const [activeColumn, setActiveColumn] = useState<IColumn | null>(null);
+  const [activeCard, setActiveCard] = useState<ICard | null>(null);
   const cardsIds = useMemo(() => {
     return cards.map((card) => card.id);
   }, [cards]);
@@ -25,6 +27,10 @@ export const KanbanProvider = ({ children }: IKanbanProviderProps) => {
         setColumns,
         cardsIds,
         columnsIds,
+        activeColumn,
+        setActiveColumn,
+        activeCard,
+        setActiveCard,
       }}
     >
       {children}
