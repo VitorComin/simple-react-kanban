@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/simple-react-kanban/static/css/main.40df3699.css",
+    "main.js": "/simple-react-kanban/static/js/main.03bb2cd4.js",
+    "index.html": "/simple-react-kanban/index.html",
+    "main.40df3699.css.map": "/simple-react-kanban/static/css/main.40df3699.css.map",
+    "main.03bb2cd4.js.map": "/simple-react-kanban/static/js/main.03bb2cd4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40df3699.css",
+    "static/js/main.03bb2cd4.js"
+  ]
+}
