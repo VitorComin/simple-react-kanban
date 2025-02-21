@@ -2,6 +2,7 @@
   "name": "simple-react-kanban",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vitorcomin.github.io/simple-react-kanban",
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
@@ -9,6 +10,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "cra-template-typescript": "1.2.0",
+    "gh-pages": "^6.3.0",
     "i18next": "^24.2.2",
     "less": "^4.2.2",
     "less-plugin-clean-css": "^1.6.0",
@@ -24,6 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
     "compile-theme": "lessc --clean-css src/styles/App.less public/App.css"
   },
   "eslintConfig": {
